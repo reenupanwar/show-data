@@ -1,0 +1,11 @@
+{
+    "/api/*": {
+        "target": "http://discover.data.vic.gov.au",
+        "secure": false,
+        "logLevel": "info"
+    }
+}
+
+
+
+   
