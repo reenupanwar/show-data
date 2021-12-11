@@ -19,10 +19,26 @@ export class WidgetComponent implements OnInit {
   records: Record[] = [];
   columns: Array<{ id: 'string'; type: 'string' }> = [];
   isApiError: boolean = false;
+  chartFields = [
+    {name: 'Population', field: 'population'},
+    {name: 'Active', field: 'active'},
+    {name: 'Cases', field: 'cases'},
+    {name: 'New', field: 'new'},
+  ]
+  selectedField: string = "";
+  showChart: boolean = false;
 
   constructor(private httpService: HttpService) {}
 
   ngOnInit(): void {}
+
+  onChange(event: any) {
+    if(event && event.value) {
+      this.showChart = true;
+    } else {
+    this.showChart = false;
+    }
+  }
   getRecords(payload: FilterPayload) {
     this.httpService.getRecords(payload).subscribe({next:(res) => {
       this.loading = false;

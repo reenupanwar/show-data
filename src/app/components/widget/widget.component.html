@@ -1,5 +1,9 @@
 
 <div class="card">
+   <div *ngIf="showChart">
+       <app-charts [selectedField]="selectedField" [chartData]="records"></app-charts>
+
+   </div> 
  <p-table #dt [columns]="columns"  [value]="records" 
   [lazy]="true" (onLazyLoad)="loadCustomers($event)" [globalFilterFields]="['LGA']"
     [paginator]="true" [rows]="10" [totalRecords]="totalRecords" [loading]="loading"> 
@@ -8,6 +12,10 @@
             <span class="p-input-icon-left p-ml-auto">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" (input)="dt.filterGlobal(getEventValue($event), 'contains')" placeholder="Search keyword" />
+            </span>
+            <span class="p-input-icon-left p-ml-auto" style ="float: right">
+                 Select Field to view Pie Chart
+            <p-dropdown [options]="chartFields" [(ngModel)]="selectedField" placeholder="Select a field"  optionLabel="name"  optionValue="field" (onChange)="onChange($event)" [showClear]="true"></p-dropdown>
             </span>
         </div>
         </ng-template>
