@@ -1,0 +1,18 @@
+#pieChartContainer {
+    position: relative;
+    & .text-center {
+        text-align: center;
+    }
+
+    
+    & #toolTip {
+        position: absolute;
+        background-color:  #213045;
+        padding: 15px;
+        color: #ffffff;
+        display: none;
+        opacity: 1;
+
+    }
+
+}

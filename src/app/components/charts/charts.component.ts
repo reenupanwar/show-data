@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import * as d3 from "d3";
+import {Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-charts',
@@ -25,8 +24,6 @@ export class ChartsComponent implements OnChanges{
       this.pieChartData.push({"label": record['LGA'], "value": +record[this.selectedField]})
 
     })
-    console.log("pie chart data", this.pieChartData);
-
   }
 
 }

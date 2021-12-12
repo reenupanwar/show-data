@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
-import { MessageService } from 'primeng/api';
 import { LazyLoadEvent } from 'primeng/api';
 
 import { FilterPayload } from '../../interfaces/filterPayload';
@@ -10,14 +9,14 @@ import { Record } from '../../interfaces/record';
   selector: 'app-widget',
   templateUrl: './widget.component.html',
   styleUrls: ['./widget.component.scss'],
-  providers: [MessageService],
+  providers: [],
 })
 export class WidgetComponent implements OnInit {
   loading: boolean = true;
   totalRecords: number = 0;
   datasource: Record[] = [];
   records: Record[] = [];
-  columns: Array<{ id: 'string'; type: 'string' }> = [];
+  columns: Array<{ id: string; type: string}> = [];
   isApiError: boolean = false;
   chartFields = [
     {name: 'Population', field: 'population'},
@@ -40,7 +39,7 @@ export class WidgetComponent implements OnInit {
     }
   }
   getRecords(payload: FilterPayload) {
-    this.httpService.getRecords(payload).subscribe({next:(res) => {
+    this.httpService.getRecords(payload).subscribe((res) => {
       this.loading = false;
       if (res.success) {
         this.isApiError = false;
@@ -52,12 +51,8 @@ export class WidgetComponent implements OnInit {
         this.records = [];
         this.isApiError = true;
       }
-    },
-    error:error => {
-      console.log(error);
-      this.loading = false;
-      this.isApiError = true;
-  }});
+    }
+  );
   }
   getEventValue($event: any): string {
     return $event.target.value;
@@ -77,6 +72,7 @@ export class WidgetComponent implements OnInit {
     };
     if (event.globalFilter && event.globalFilter.length > 0) {
       payload.q = event.globalFilter;
+      
     }
     this.getRecords(payload);
 

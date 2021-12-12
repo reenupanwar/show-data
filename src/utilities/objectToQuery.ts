@@ -1,4 +1,6 @@
 
-// const qs = Object.keys(params)
-//     .map(key => `${key}=${params[key]}`)
-//     .join('&');
+export const queryStringConversion = (params: any)  => {
+    return Object.keys(params)
+    .map(key => `${key}=${params[key]}`)
+    .join('&')
+}

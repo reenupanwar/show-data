@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient} from '@angular/common/http';
+import { catchError, map, Observable, of, pipe, tap } from 'rxjs';
+import { HttpClient, HttpErrorResponse} from '@angular/common/http';
+import { queryStringConversion } from '../../utilities/objectToQuery';
+import { FilterPayload } from '../interfaces/filterPayload';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +16,25 @@ export class HttpService {
  }  
 
 
-  getRecords(payload: any): Observable<any> {
-      // convert objec to a query string
-      const qs = Object.keys(payload)
-      .map(key => `${key}=${payload[key]}`)
-      .join('&'); 
-      const url = `${this.getBaseUrl()}&${qs}`;
-      console.log("here in url", url);
-
-      return this.http.get(url);  
+  // getRecords(payload: FilterPayload): Observable<any> {
+  //     // convert objec to a query string
+  //     const qs = queryStringConversion(payload);
+  //     const url = `${this.getBaseUrl()}&${qs}`;
+  //     return this.http.get(url);  
   
+  // }
+  getRecords(payload: FilterPayload): Observable<any> {
+    const qs = queryStringConversion(payload);
+    const url = `${this.getBaseUrl()}&${qs}`;
+    return this.http.get(url).pipe(
+        map((res) => {
+           return res;
+        }),
+        catchError(this.handleError)
+    )
   }
+
+  private handleError(error: any): Observable<any> {
+      return of(error);
+  };
 }
