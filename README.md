@@ -1,6 +1,9 @@
 # ShowData
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.4.
+steps to run:
+1. clone the project
+2. run 'npm install' command to install all packages
 
 ## Development server
 
