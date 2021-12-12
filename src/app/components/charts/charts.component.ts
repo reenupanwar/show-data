@@ -21,7 +21,9 @@ export class ChartsComponent implements OnChanges{
   createChartData() {
     this.pieChartData = [];
     this.chartData.map((record: any) => {
-      this.pieChartData.push({"label": record['LGA'], "value": +record[this.selectedField]})
+      if(+record[this.selectedField] != 0) {
+       this.pieChartData.push({"label": record['LGA'], "value": +record[this.selectedField]})
+      }
 
     })
   }

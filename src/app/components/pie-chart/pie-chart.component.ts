@@ -52,6 +52,7 @@ export class PieChartComponent implements OnInit, OnChanges {
   buildPie(): void {
     let pie = d3.pie();
     let values = this.pieChartData.map((data, index) => data.value);
+    console.log("here in values", values);
     let arcSelection = this.svg
       .selectAll('.arc')
       .data(pie(values))
